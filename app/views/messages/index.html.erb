@@ -15,9 +15,9 @@
           </ul>
         <% end %>
       </ul>
-      <div class="create-room">
-        <a href="#">投稿</a>
-      </div>
+      <%= link_to(new_room_path, class: 'create-room') do %>
+        <span class='create-room a'>投稿する</span>
+      <% end %>
     </div>
     <div class="rooms">
     </div>
