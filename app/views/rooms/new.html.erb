@@ -1,24 +1,43 @@
 <div class="items-sell-contents">
-  <header class="items-sell-header">
-    <%= link_to image_tag('1615.png' , size: '185x50'), "/" %>
 
+  <header class="items-sell-header">
+    <%#= link_to image_tag('1615.png' , size: '185x50'), "/" %>
   </header>
+  
   <div class="items-sell-main">
-    <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%# 出品画像 %>
+    <h2 class="items-sell-title">投稿内容を入力</h2>
+    <%= form_with model: @item, local: true do |f| %>
+    <%# 投稿画像 %>
     <div class="img-upload">
       <div class="weight-bold-text">
-        出品画像
-        <span class="indispensable">必須</span>
+        投稿画像
       </div>
       <div class="click-upload">
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= image_tag room.image, class: 'room-image' if room.image.attached? %>
-        <%=# f.file_field :image, id:"room-image" %>
+        <%= f.file_field :image, id:"room-image" %>
       </div>
     </div>
-    <%# /出品画像 %>
+    <%# 投稿画像 %>
+    <div class="items-explain">
+        <div class="weight-bold-text">
+          投稿文章
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :explanation, class:"items-text", id:"item-info", placeholder:"投稿文章（必須 1,000文字まで）" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+        <div class="weight-bold-text">
+          カテゴリー
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:category_id, Category.all, :id, :category, {}, {class:"select-box",}) %>
+        <%# 下部ボタン %>
+    <div class="sell-btn-contents">
+      <%= f.submit "投稿する" ,class:"sell-btn" %>
+      <%=link_to 'もどる', root_path, class:"back-btn" %>
+    </div>
+    <%# /下部ボタン %>
   </div>
+  <% end %>
 </div>
